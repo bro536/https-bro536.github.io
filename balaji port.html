@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balaji S — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1614;
+    --ink-soft: #4a4540;
+    --ink-mute: #8a8480;
+    --paper: #faf8f4;
+    --paper-warm: #f2ede4;
+    --paper-card: #ffffff;
+    --accent: #c25b2e;
+    --accent-light: #f5ece6;
+    --accent-dark: #8c3e1c;
+    --teal: #1d9e75;
+    --teal-light: #e1f5ee;
+    --border: rgba(26,22,20,0.1);
+    --shadow: 0 2px 24px rgba(26,22,20,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 5rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f5ece6 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 440px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    border: 1.5px solid var(--border);
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  /* Hero visual side */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-card-stack {
+    position: relative;
+    width: 320px;
+    height: 380px;
+  }
+
+  .card-back {
+    position: absolute;
+    width: 280px;
+    height: 340px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .card-back-1 {
+    background: var(--accent-light);
+    top: 20px;
+    left: 30px;
+    transform: rotate(6deg);
+  }
+
+  .card-back-2 {
+    background: var(--teal-light);
+    top: 10px;
+    left: 15px;
+    transform: rotate(-3deg);
+  }
+
+  .card-main {
+    position: absolute;
+    width: 280px;
+    background: var(--paper-card);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    top: 0;
+    left: 0;
+  }
+
+  .avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-title {
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    margin-bottom: 1.25rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  .tag-accent { background: var(--accent-light); color: var(--accent-dark); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .tag-gray { background: var(--paper-warm); color: var(--ink-soft); }
+
+  .card-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .card-stat {
+    background: var(--paper);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    text-align: center;
+  }
+
+  .card-stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+  }
+
+  .card-stat-label {
+    font-size: 0.68rem;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 0.5px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--ink-soft);
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: var(--paper-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  .info-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.2rem;
+  }
+
+  .info-val {
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--paper-card);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .skill-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-desc {
+    font-size: 0.88rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+
+  /* EXPERIENCE */
+  .exp-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .exp-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 1.5rem;
+  }
+
+  .exp-dot {
+    position: absolute;
+    left: -2.5rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .exp-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .exp-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-points li {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .exp-points li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .edu-card {
+    background: var(--paper-card);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  }
+
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-year {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* CONTACT */
+  .contact-wrapper {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    color: white;
+  }
+
+  .contact-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .contact-title em { color: var(--accent); font-style: italic; }
+
+  .contact-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.92rem;
+    transition: background 0.2s;
+  }
+
+  .contact-link:hover { background: rgba(255,255,255,0.11); }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    border-top: 0.5px solid var(--border);
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.34s; }
+  .delay-4 { animation-delay: 0.46s; }
+  .delay-5 { animation-delay: 0.58s; }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; padding: 80px 2rem 3rem; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-wrapper { grid-template-columns: 1fr; padding: 2.5rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Balaji S</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow fade-in">Available for opportunities</p>
+    <h1 class="hero-name fade-in delay-1">Balaji<br><em></em></h1>
+    <p class="hero-desc fade-in delay-2">Data Analytics enthusiast with hands-on experience in Python, Power BI, and front-end development. Turning raw data into meaningful insights.</p>
+    <div class="hero-actions fade-in delay-3">
+      <a href="#contact" class="btn-primary">Get in touch →</a>
+      <a href="#experience" class="btn-outline">View work</a>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-in delay-4">
+    <div class="hero-card-stack">
+      <div class="card-back card-back-1"></div>
+      <div class="card-back card-back-2"></div>
+      <div class="card-main">
+        <div class="avatar">B</div>
+        <div class="card-name">Balaji S</div>
+        <div class="card-title">Data Analytics &amp; Front-End Developer</div>
+        <div class="card-tags">
+          <span class="tag tag-accent">Python</span>
+          <span class="tag tag-teal">Power BI</span>
+          <span class="tag tag-gray">UI/UX</span>
+          <span class="tag tag-accent">Data Analytics</span>
+        </div>
+        <div class="card-stat-row">
+          <div class="card-stat">
+            <div class="card-stat-val">3+</div>
+            <div class="card-stat-label">Certifications</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">2</div>
+            <div class="card-stat-label">Languages</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <p class="section-eyebrow">About me</p>
+    <h2 class="section-title">Energetic. Curious.<br>Detail-oriented.</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a Computer Science student specializing in Data Analytics, passionate about using data to drive better decisions and build digital experiences that matter.</p>
+      <p>Through internships, certifications, and hands-on projects, I've sharpened my skills in data analysis, visualization, and front-end web development — always eager to solve real-world problems with clean, effective solutions.</p>
+      <p>I communicate clearly, adapt quickly, and thrive in team environments. I'm actively looking to contribute to innovative organizations where I can grow and make an impact.</p>
+    </div>
+    <div class="about-info">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-val">Coimbatore, Tamil Nadu</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val">+91 70946 43984</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-val">Sbalajib114@gmail.com</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">💼</div>
+        <div>
+          <div class="info-label">LinkedIn</div>
+          <div class="info-val">linkedin.com/in/balaji114</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🌐</div>
+        <div>
+          <div class="info-label">Languages</div>
+          <div class="info-val">Tamil (Native) · English (Fluent)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <p class="section-eyebrow">What I do</p>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #fdf0e8;">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc">Data analysis, automation, and statistical techniques for uncovering patterns in complex datasets.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #e1f5ee;">📊</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-desc">Building interactive dashboards and compelling data visualizations to communicate insights clearly.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #eeedfe;">🌐</div>
+      <div class="skill-name">Web Development</div>
+      <div class="skill-desc">Front-end development with a focus on clean, responsive, user-friendly interfaces and experiences.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #fbeaf0;">🎨</div>
+      <div class="skill-name">UI/UX Design</div>
+      <div class="skill-desc">Designing intuitive digital experiences, certified through Sprouts Organization, Coimbatore.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #faeeda;">📑</div>
+      <div class="skill-name">Excel &amp; Analytics</div>
+      <div class="skill-desc">Spreadsheet modelling, data preprocessing, and reporting for business decision-making.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon" style="background: #e6f1fb;">🖌️</div>
+      <div class="skill-name">Canva &amp; Blender</div>
+      <div class="skill-desc">Visual content creation and 3D modelling for creative digital projects and presentations.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <p class="section-eyebrow">Work experience</p>
+    <h2 class="section-title">Where I've worked</h2>
+  </div>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">May 2025</div>
+      <div class="exp-title">Data Analytics Intern</div>
+      <div class="exp-company">Skylena Info Technology Pvt. Ltd. — Coimbatore</div>
+      <ul class="exp-points">
+        <li>Supported data collection, preprocessing, and analysis for internal business reports.</li>
+        <li>Applied statistical techniques to uncover patterns and improve organizational decision-making.</li>
+        <li>Built interactive visualizations using Power BI and Tableau for stakeholder reporting.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <p class="section-eyebrow">Academic background</p>
+    <h2 class="section-title">Education &amp; Certifications</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">B.Sc. Computer Science with Data Analytics</div>
+      <div class="edu-school">Sankara College of Science and Commerce (Autonomous), Coimbatore</div>
+      <div class="edu-year">Ongoing</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">AI, Data Science &amp; Power BI Certification</div>
+      <div class="edu-school">Christ University, Bangalore</div>
+      <div class="edu-year">Certification</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Software Solutions &amp; Data Training</div>
+      <div class="edu-school">Data Software Solutions, Coimbatore</div>
+      <div class="edu-year">Training</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">UI/UX Design Certification</div>
+      <div class="edu-school">Sprouts Organization, Coimbatore</div>
+      <div class="edu-year">Certification</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div>
+      <h2 class="contact-title">Let's work<br><em>together.</em></h2>
+      <p class="contact-sub">I'm open to internships, full-time roles, and collaborative projects in data analytics, front-end development, or UI/UX design.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:Sbalajib114@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em">Email</div>
+          Sbalajib114@gmail.com
+        </div>
+      </a>
+      <a href="tel:+917094643984" class="contact-link">
+        <div class="contact-link-icon">📞</div>
+        <div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em">Phone</div>
+          +91 70946 43984
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/balaji114" target="_blank" class="contact-link">
+        <div class="contact-link-icon">💼</div>
+        <div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em">LinkedIn</div>
+          linkedin.com/in/balaji114
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Balaji S. — Designed &amp; built with care.</p>
+</footer>
+
+</body>
+</html>
